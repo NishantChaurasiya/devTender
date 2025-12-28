@@ -1,9 +1,12 @@
 const express=require("express");
 const app=express()
-app.use("/test",(req,res)=>{
+app.get("/test",(req,res)=>{
     res.send("hello from test page")
 })
-app.use("/",(req,res)=>{
+app.post("/user",(req,res)=>{
+    res.send("data save in database")
+})
+app.get("/",(req,res)=>{
     res.send("hello from home page")
 })
 app.listen(3000,()=>{
