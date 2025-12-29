@@ -1,17 +1,15 @@
-const express=require("express");
-const app=express()
+const express = require("express")
+const connectDb = require("./config/db")
+const app = express()
 
-app.get("/user",(req,res)=>{
- console.log(req.query);
- res.send("done")
- 
-})
-app.get("/product/:id/:name/:price",(req,res)=>{
-console.log(req.params);
-
-res.send("fetching data done")
-})
-app.listen(3000,()=>{
-    console.log("server in running on port 3000");
-    
-})
+connectDb()
+    .then(() => {
+        console.log("database connect successfully");
+        app.listen(3000, () => {
+            console.log("server is started at port 3000");
+        })
+    })
+    .catch((err)=>{
+        console.log("error in connection to databse",err.message);
+        
+    })
